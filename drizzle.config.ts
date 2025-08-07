@@ -19,7 +19,7 @@ export default defineConfig({
   },
   migrations: {
 
-    table: "__drizzle_migration",
+    table: "__drizzle_migrations",
     schema: "public",
   },
   verbose: true,
