@@ -18,10 +18,7 @@ import { signUpSchema } from "@/schemas/signUpSchema";
 import { AlertCircle, CheckCircle, Eye, EyeOff, Link, Lock, Mail } from "lucide-react";
 
 // hero ui packages
-import { Card, CardBody, CardFooter, CardHeader } from "@heroui/react";
-import { Button  } from "@heroui/react";
-import { Input   } from "@heroui/react";
-import { Divider } from "@heroui/react";
+import { Button, Card, CardBody, CardFooter, CardHeader, Divider, Input } from "@heroui/react";
 
 
 export default function SignUpForm(){
@@ -139,12 +136,13 @@ export default function SignUpForm(){
               <AlertCircle className="flex-shrink-0 h-5 w-5" />
               <p>
                 
-                { verificationError }
+                { verificationError };
 
               </p>
             </div>
            )
           }
+
           <form onSubmit={ handleVerificationSubmit } className="space-y-6">
             <div className="space-y-2">
               <label htmlFor="verificationCode" className="text-sm font-medium text-default-900">
@@ -167,7 +165,9 @@ export default function SignUpForm(){
               color="primary"
               isLoading={ isSubmitting }
             > 
-              { isSubmitting ? ( "Verifying...") : ("Verifying Email") }
+
+              { isSubmitting ? ( "Verifying...") : ("Verifying Email") };
+
             </Button>
           </form>
 
@@ -191,9 +191,11 @@ export default function SignUpForm(){
           </div>
         </CardBody>
       </Card>
-    );
-  }
+    )
+  };
+  
   return (
+
     <Card className="w-full max-w-md border border-default-200 bg-default-50 shadow-xl">
         <CardHeader className="flex flex-col gap-1 items-center pb-2">
           <h1 className="text-2xl font-bold text-default-900">
@@ -216,11 +218,12 @@ export default function SignUpForm(){
               <AlertCircle className="flex-shrink-0 h-5 w-5" />
                 <p>
                   
-                  { authError }
+                  { authError };
 
                 </p>
             </div>
-          )}
+            )
+          }
 
           <form onSubmit={ handleSubmit(onSubmit) } className="space-y-2">
             <div className="space-y-6">
@@ -261,9 +264,10 @@ export default function SignUpForm(){
                   >
                     { showPassword ? (
                       <EyeOff className="h-4 w-4 text-default-500" />
-                    ) : (
-                      <Eye className="h-4 w-4 text-default-500" />
-                    )}
+                      ) : (
+                      <Eye    className="h-4 w-4 text-default-500" />
+                      )
+                    }
                   </Button> 
                 }
                 isInvalid={ !!errors.password }
@@ -293,9 +297,10 @@ export default function SignUpForm(){
                   >
                     { showConfirmPassword ? (
                       <EyeOff className="h-4 w-4 text-default-500" />
-                    ) : (
-                      <Eye className="h-4 w-4 text-default-500" />
-                    )}
+                      ) : (
+                      <Eye    className="h-4 w-4 text-default-500" />
+                      )
+                    }
                   </Button>
                 }
                 isInvalid={ !!errors.passwordConfirmation }
@@ -320,14 +325,16 @@ export default function SignUpForm(){
               color="primary"
               isLoading={ isSubmitting }
             >
-             { isSubmitting ? "Creating Account..." : "Create Account" }
+
+             { isSubmitting ? "Creating Account..." : "Create Account" };
+
             </Button>
           </form>
         </CardBody>
       <CardFooter className="flex justify-content py-4">
         <p className="text-sm text-default-600">
           
-          Already have an account?{" "}
+          Already have an account?{" "};
 
           <Link className="text-primary hover:underline font-medium">
 
