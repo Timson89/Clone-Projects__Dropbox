@@ -9,7 +9,8 @@ import { z } from "zod";
 // zod custom schema
 import { signUpSchema } from "@/schemas/signUpSchema";
 import { zodResolver  } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
+import { useRouter }    from "next/navigation";
+import {Card, CardBody, CardHeader} from "@heroui/react";
 
 
 export default function SignUpForm(){
@@ -96,11 +97,86 @@ export default function SignUpForm(){
   };
 
   if (verifying){
+
     return (
-      <h1>This is OTP entering field</h1>
-    )
+
+      <Card className="w-full max-w-md border border-default-200 bg-default-50 shadow-xl">
+        <CardHeader className="flex flex-col gap-1 items-center pb-2">
+          <h1 className="text-2xl font-bold text-default-900">
+         Verify Your Email
+          </h1>
+          <p className="text-default-500 text-center">
+         We've sent a verification code to your email.
+          </p>
+        </CardHeader>
+
+        <Divider />
+
+        <CardBody className="py-6">
+          { verificationError && (
+            <div className="flex items-center gap-2 bg-danger-50 text-danger-700 p-4 rounded-lg mb-6 ">
+              <AlertCircle className="flex-shrink-0 h-5 w-5" />
+              <p>{ verificationError }</p>
+            </div>
+           )
+          }
+          <form onSubmit={ handleVerificationSubmit } className="space-y-6">
+            <div className="space-y-2">
+              <label htmlFor="verificationCode" className="text-sm font-medium text-default-900">
+             Verification Code
+              </label>
+              <input className="w-full" 
+                id="verificationCode"
+                type="text"
+                placeholder="Enter the 6-digit code"
+                value={ verificationCode }
+                onChange={(e) => setVerificationCode(e.target.value)}
+                autoFocus 
+              />
+            </div>
+
+            <Button className="w-full"
+              type="submit"
+              color="primary"
+              isLoading={ isSubmitting }
+            > 
+              { isSubmitting ? ( "Verifying...") : ("Verifying Email") }
+            </Button>
+          </form>
+
+          <div className="mt-6 text-center">
+            <p className="text-sm text-default-500">
+           Didn't recieve a code?{" "}
+              <button className="text-primary hover:underline font-medium"
+                onClick={ async () => {
+                  if (signUp){
+                    await signUp.prepareEmailAddressVerification({
+                      strategy: ("email_code"),
+                    });
+                  }
+                }}
+              >
+             Resend Code
+              </button>
+            </p>
+          </div>
+        </CardBody>
+      </Card>
+    );
   }
   return (
-    <h1>signup form with email and other fields</h1>
+    <Card className="w-full max-w-md border border-default-200 bg-default-50 shadow-xl">
+        <CardHeader className="flex flex-col gap-1 items-center pb-2">
+          <h1 className="text-2xl font-bold text-default-900">
+         Verify Your Email
+          </h1>
+          <p className="text-default-500 text-center">
+         We've sent a verification code to your email.
+          </p>
+        </CardHeader>
+
+        <Divider />
+
+    </Card>
   )
 }
