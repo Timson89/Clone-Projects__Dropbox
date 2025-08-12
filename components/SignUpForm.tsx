@@ -10,12 +10,14 @@ import { useSignUp } from "@clerk/nextjs";
 import { z } from "zod";
 
 // zod custom schema
-import { signUpSchema } from "@/schemas/signUpSchema";
-import { zodResolver  } from "@hookform/resolvers/zod";
 import { useRouter    } from "next/navigation";
+import { zodResolver  } from "@hookform/resolvers/zod";
+import { signUpSchema } from "@/schemas/signUpSchema";
 
+// lucide icons
 import { AlertCircle, CheckCircle, Eye, EyeOff, Link, Lock, Mail } from "lucide-react";
 
+// hero ui packages
 import { Card, CardBody, CardFooter, CardHeader } from "@heroui/react";
 import { Button  } from "@heroui/react";
 import { Input   } from "@heroui/react";
@@ -102,7 +104,7 @@ export default function SignUpForm(){
       }
     } catch ( error: any ){
       console.error("verification incomplete", error);
-      ("Verification could not be completed")
+      ("Verification could not be completed");
       setVerificationError(
         error.errors?.[0]?.message || 
         
