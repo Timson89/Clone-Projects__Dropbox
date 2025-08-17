@@ -17,7 +17,10 @@ try {
   const { userId } = await auth();
 
   if (!userId){
-    return NextResponse.json({ error: ("Unautherized")}, { status: 401 });
+    return NextResponse.json(
+      { error: ("Unautherized")}, 
+      { status: 401 }
+    );
   }
 
   const authParams = imagekit.getAuthenticationParameters();
@@ -25,6 +28,9 @@ try {
   return NextResponse.json(authParams);
 
   } catch (error){
-    return NextResponse.json({ error: ("Failed to generate authentication parameters for imagekit.")}, { status: 500 });
+    return NextResponse.json(
+      { error: ("Failed to generate authentication parameters for imagekit.")}, 
+      { status: 500 }
+    );
   }
 };

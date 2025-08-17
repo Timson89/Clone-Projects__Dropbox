@@ -1,5 +1,5 @@
 import { db   } from "@/lib/db";
-import { File } from "@/lib/db/schema";
+import { files } from "@/lib/db/schema";
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -12,7 +12,7 @@ export async function POST(request: NextRequest){
 
     if (!userId){
       return NextResponse.json(
-        { error: ("Unautherized") }, 
+        { error: ("Unautherized")}, 
         { status: 401 }
       );
     }
@@ -23,14 +23,14 @@ export async function POST(request: NextRequest){
 
     if (bodyUserId !== userId){
       return NextResponse.json(
-        { error: ("Unautherized") }, 
+        { error: ("Unautherized")}, 
         { status: 401 }
       );
     }
 
     if (!imagekit || !imagekit.url){
       return NextResponse.json(
-        { error: ("Invalid File Upload Data") }, 
+        { error: ("Invalid File Upload Data")}, 
         { status: 401 }
       );
     }
@@ -48,9 +48,16 @@ export async function POST(request: NextRequest){
       isFolder:     (false),
       isStarred:    (false),
       isTrash:      (false)
-    }
+    };
+
+    const [newFile] = await db.insert(files).values(fileData).returning();
+
+    return NextResponse.json(newFile);
 
   } catch (error){
-    
+    return NextResponse.json(
+      { error: ("Failed to save data to database")}, 
+      { status: 500 }
+    );
   }
 }
